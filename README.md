@@ -1,6 +1,6 @@
 # Android studio a key international plugin, The project is for engineers working on Google play developers
 
-# How to use?
+# How to use?([中文文档](http://blog.csdn.net/CoderYue/article/details/75177505))
 
 [Download zip](https://github.com/jinguangyue/AndroidStringsOneTabTranslation/blob/master/AndroidStringsOneTabTranslation.zip)
  
