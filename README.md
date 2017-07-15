@@ -1,10 +1,12 @@
-#Android studio a key international plugin, The project is for engineers working on Google play developers
+# Android studio a key international plugin, The project is for engineers working on Google play developers
 
-#How to use?
+# How to use?
 
+[Download zip](https://github.com/jinguangyue/AndroidStringsOneTabTranslation/blob/master/AndroidStringsOneTabTranslation.zip)
+ 
 ![](https://github.com/jinguangyue/AndroidStringsOneTabTranslation/blob/master/screenshots/howUse.gif)
 
-#Most of the code comes from: https://github.com/westlinkin/AndroidLocalizationer. 
+# Most of the code comes from: https://github.com/westlinkin/AndroidLocalizationer. 
 But it is not updated for a long time, a lot of bugs, so I changed its project, I hope everyone together to maintain.
  
 Differences to AndroidLocalizationer:
