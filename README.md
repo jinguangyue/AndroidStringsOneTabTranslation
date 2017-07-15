@@ -2,7 +2,7 @@
 
 #How to use?
 
-![]()
+![](https://github.com/jinguangyue/AndroidStringsOneTabTranslation/blob/master/screenshots/howUse.gif)
 
 #Most of the code comes from: https://github.com/westlinkin/AndroidLocalizationer. 
 But it is not updated for a long time, a lot of bugs, so I changed its project, I hope everyone together to maintain.
