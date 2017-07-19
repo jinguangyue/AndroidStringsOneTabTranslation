@@ -36,7 +36,7 @@ import java.util.List;
  * Created by Wesley Lin on 12/1/14.
  */
 public class GoogleTranslationApi {
-    private static final String BASE_TRANSLATION_URL = "https://translation.googleapis.com/language/translate/v2?%s&target=%s&source=%s&key=%s";
+    private static final String BASE_TRANSLATION_URL = "https://www.googleapis.com/language/translate/v2?%s&target=%s&source=%s&key=%s";
 
     /**
      * @param querys
