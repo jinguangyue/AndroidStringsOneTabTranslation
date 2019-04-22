@@ -117,8 +117,8 @@ public enum SupportedLanguages {
 
     public static List<SupportedLanguages> getAllSupportedLanguages(TranslationEngineType type) {
         switch (type) {
-            /*case Bing:
-                return getBingLanguages();*/
+            case Bing:
+                return getBingLanguages();
             case Google:
                 return getGoogleLanguages();
         }

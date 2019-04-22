@@ -20,10 +20,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.intellij.ide.util.PropertiesComponent;
+import data.Key;
 import data.Log;
 import data.StorageDataKey;
 import language_engine.HttpUtils;
 import module.SupportedLanguages;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URLEncoder;
@@ -36,7 +39,8 @@ import java.util.List;
  * Created by Wesley Lin on 12/1/14.
  */
 public class GoogleTranslationApi {
-    private static final String BASE_TRANSLATION_URL = "https://www.googleapis.com/language/translate/v2?%s&target=%s&source=%s&key=%s";
+    //
+    private static final String BASE_TRANSLATION_URL = "https://www.translation.googleapis.com/language/translate/v2";
 
     /**
      * @param querys
@@ -58,11 +62,9 @@ public class GoogleTranslationApi {
         }
 
         String url = null;
+        //PropertiesComponent.getInstance().getValue(StorageDataKey.GoogleApiKeyStored)
         try {
-            url = String.format(BASE_TRANSLATION_URL, query,
-                    targetLanguageCode.getLanguageCode(),
-                    sourceLanguageCode.getLanguageCode(),
-                    PropertiesComponent.getInstance().getValue(StorageDataKey.GoogleApiKeyStored), "");
+            url = BASE_TRANSLATION_URL;
         } catch (IllegalFormatException e) {
             Log.i("error====" + e.getMessage());
         }
@@ -72,7 +74,9 @@ public class GoogleTranslationApi {
         if (url == null)
             return null;
 
-        String getResult = HttpUtils.doHttpGet(url);
+
+
+        String getResult = HttpUtils.doHttpPost(url, getAccessTokenNameValuePair());
         Log.i("do get result: " + getResult + "   url====" + url);
 
         JsonObject jsonObject = new JsonParser().parse(getResult).getAsJsonObject();
@@ -96,5 +100,14 @@ public class GoogleTranslationApi {
             }
         }
         return null;
+    }
+
+    private static List<NameValuePair> getAccessTokenNameValuePair() {
+        List<NameValuePair> params = new ArrayList<NameValuePair>(4);
+        params.add(new BasicNameValuePair("q", "code"));
+        params.add(new BasicNameValuePair("target", "zh"));
+        params.add(new BasicNameValuePair("source", "en"));
+        params.add(new BasicNameValuePair("key", GoogleKeyConfig.GOOGLEAPI_KEY));
+        return params;
     }
 }

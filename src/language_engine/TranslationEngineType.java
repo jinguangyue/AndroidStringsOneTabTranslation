@@ -20,7 +20,7 @@ package language_engine;
  * Created by Wesley Lin on 12/2/14.
  */
 public enum TranslationEngineType {
-//    Bing("Microsoft Translator"),
+    Bing("Microsoft Translator"),
     Google("Google Translation API");
 
     private String displayName;
@@ -35,7 +35,7 @@ public enum TranslationEngineType {
 
     public static TranslationEngineType[] getLanguageEngineArray() {
         return new TranslationEngineType[]{
-//                Bing,
+                Bing,
                 Google
         };
     }

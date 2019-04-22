@@ -102,7 +102,7 @@ public class GetTranslationTask extends Task.Backgroundable {
                             SupportedLanguages.English,
                             translationEngineType
                     );
-
+                    Log.i("language===" + language);
                     if (strings == null) {
                         Log.i("language===" + language);
                         continue;
@@ -154,6 +154,19 @@ public class GetTranslationTask extends Task.Backgroundable {
         List<String> result = null;
 
         switch (translationEngineType) {
+            case Bing:
+                String accessToken = BingTranslationApi.getAccessToken();
+                if (accessToken == null) {
+                    errorMsg = BingIdInvalid;
+                    return null;
+                }
+                result = BingTranslationApi.getTranslatedStringArrays2(accessToken, querys, sourceLanguageCode, targetLanguageCode);
+
+                if ((result == null || result.isEmpty()) && !querys.isEmpty()) {
+                    errorMsg = BingQuotaExceeded;
+                    return null;
+                }
+                break;
             case Google:
                 result = GoogleTranslationApi.getTranslationJSON(querys, targetLanguageCode, sourceLanguageCode);
                 if (result == null) {
@@ -164,7 +177,9 @@ public class GetTranslationTask extends Task.Backgroundable {
                     return null;
                 }
                 break;
+
         }
+
 
         List<AndroidString> translatedAndroidStrings = new ArrayList<AndroidString>();
 
@@ -182,9 +197,9 @@ public class GetTranslationTask extends Task.Backgroundable {
         List<List<AndroidString>> splited = new ArrayList<List<AndroidString>>();
         int splitFragment = 50;
         switch (engineType) {
-            /*case Bing:
+            case Bing:
                 splitFragment = 50;
-                break;*/
+                break;
             case Google:
                 splitFragment = 50;
                 break;
