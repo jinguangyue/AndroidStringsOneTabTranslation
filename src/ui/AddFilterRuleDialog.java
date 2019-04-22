@@ -109,7 +109,7 @@ public class AddFilterRuleDialog extends DialogWrapper {
     }
 
     @NotNull
-    LayoutManager createRootLayout() {
+    protected LayoutManager createRootLayout() {
         return Messages.isMacSheetEmulation() ? myLayout = new MyBorderLayout() : new BorderLayout();
     }
 

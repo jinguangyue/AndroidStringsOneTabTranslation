@@ -140,7 +140,7 @@ public class MultiSelectDialog extends DialogWrapper {
     }
 
     @NotNull
-    LayoutManager createRootLayout() {
+    protected LayoutManager createRootLayout() {
         return Messages.isMacSheetEmulation() ? myLayout = new MyBorderLayout() : new BorderLayout();
     }
 

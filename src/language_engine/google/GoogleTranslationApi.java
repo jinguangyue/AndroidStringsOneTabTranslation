@@ -40,7 +40,7 @@ import java.util.List;
  */
 public class GoogleTranslationApi {
     //
-    private static final String BASE_TRANSLATION_URL = "https://www.translation.googleapis.com/language/translate/v2";
+    private static final String BASE_TRANSLATION_URL = "https://translation.googleapis.com/language/translate/v2";
 
     /**
      * @param querys
@@ -53,31 +53,24 @@ public class GoogleTranslationApi {
                                                   @NotNull SupportedLanguages sourceLanguageCode) {
         if (querys.isEmpty())
             return null;
+
+        List<NameValuePair> params = new ArrayList<NameValuePair>(4);
+
         String query = "";
         for (int i = 0; i < querys.size(); i++) {
-            query += ("q=" + URLEncoder.encode(querys.get(i)));
-            if (i != querys.size() - 1) {
-                query += "&";
-            }
+            params.add(new BasicNameValuePair("q", URLEncoder.encode(querys.get(i))));
+
+//            query += ("q=" + URLEncoder.encode(querys.get(i)));
+//            if (i != querys.size() - 1) {
+//                query += "&";
+//            }
         }
+        params.add(new BasicNameValuePair("target", targetLanguageCode.getLanguageCode()));
+        params.add(new BasicNameValuePair("source", sourceLanguageCode.getLanguageCode()));
+        params.add(new BasicNameValuePair("key", PropertiesComponent.getInstance().getValue(StorageDataKey.GoogleApiKeyStored)));
 
-        String url = null;
-        //PropertiesComponent.getInstance().getValue(StorageDataKey.GoogleApiKeyStored)
-        try {
-            url = BASE_TRANSLATION_URL;
-        } catch (IllegalFormatException e) {
-            Log.i("error====" + e.getMessage());
-        }
-
-        Log.i("url====" + url);
-
-        if (url == null)
-            return null;
-
-
-
-        String getResult = HttpUtils.doHttpPost(url, getAccessTokenNameValuePair());
-        Log.i("do get result: " + getResult + "   url====" + url);
+        String getResult = HttpUtils.doHttpPost(BASE_TRANSLATION_URL, params);
+        Log.i("do get result: " + getResult + "   url====" + BASE_TRANSLATION_URL);
 
         JsonObject jsonObject = new JsonParser().parse(getResult).getAsJsonObject();
         if (jsonObject.get("error") != null) {
@@ -100,14 +93,5 @@ public class GoogleTranslationApi {
             }
         }
         return null;
-    }
-
-    private static List<NameValuePair> getAccessTokenNameValuePair() {
-        List<NameValuePair> params = new ArrayList<NameValuePair>(4);
-        params.add(new BasicNameValuePair("q", "code"));
-        params.add(new BasicNameValuePair("target", "zh"));
-        params.add(new BasicNameValuePair("source", "en"));
-        params.add(new BasicNameValuePair("key", GoogleKeyConfig.GOOGLEAPI_KEY));
-        return params;
     }
 }
