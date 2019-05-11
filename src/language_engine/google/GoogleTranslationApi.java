@@ -70,6 +70,7 @@ public class GoogleTranslationApi {
         params.add(new BasicNameValuePair("key", PropertiesComponent.getInstance().getValue(StorageDataKey.GoogleApiKeyStored)));
 
         String getResult = HttpUtils.doHttpPost(BASE_TRANSLATION_URL, params);
+        getResult = getResult.replaceAll("\\+ ", "");
         Log.i("do get result: " + getResult + "   url====" + BASE_TRANSLATION_URL);
         Log.i("apikey====" + PropertiesComponent.getInstance().getValue(StorageDataKey.GoogleApiKeyStored));
 
@@ -88,11 +89,16 @@ public class GoogleTranslationApi {
             if (translations != null) {
                 List<String> result = new ArrayList<String>();
                 for (int i = 0; i < translations.size(); i++) {
-                    result.add(translations.get(i).getAsJsonObject().get("translatedText").getAsString());
+                    String source = translations.get(i).getAsJsonObject().get("translatedText").getAsString();
+                    source = source.replaceAll("\\+", "");
+                    result.add(source);
                 }
                 return result;
             }
         }
         return null;
     }
+
+
+
 }
