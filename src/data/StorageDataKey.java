@@ -16,9 +16,6 @@
 
 package data;
 
-/**
- * Created by Wesley Lin on 11/30/14.
- */
 public class StorageDataKey {
     public static final String OverrideCheckBoxStatus = "AL_OverrideCheckBoxStatus";
 

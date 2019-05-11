@@ -118,6 +118,7 @@ public class GetTranslationTask extends Task.Backgroundable {
                 }
 
                 String fileName = getValueResourcePath(language);
+                Log.i("filename===" + fileName);
                 List<AndroidString> fileContent = getTargetAndroidStrings(androidStrings, translationResult, fileName, override);
 
                 writeAndroidStringToLocal(myProject, fileName, fileContent);
@@ -138,6 +139,8 @@ public class GetTranslationTask extends Task.Backgroundable {
         String resPath = clickedFile.getPath().substring(0,
                 clickedFile.getPath().indexOf("/res/") + "/res/".length());
 
+        Log.i("clickedFile===" + clickedFile.getPath());
+        Log.i("resPath===" + resPath);
         return resPath + "values-" + language.getAndroidStringFolderNameSuffix()
                 + "/" + clickedFile.getName();
     }

@@ -152,7 +152,7 @@ public class SettingConfigurable implements Configurable, ActionListener {
 
         PropertiesComponent propertiesComponent = PropertiesComponent.getInstance();
         switch (currentEngine) {
-            /*case Bing: {
+            case Bing: {
                 String bingClientIdStored = propertiesComponent.getValue(StorageDataKey.BingClientIdStored);
                 String bingClientSecretStored = propertiesComponent.getValue(StorageDataKey.BingClientSecretStored);
 
@@ -178,7 +178,7 @@ public class SettingConfigurable implements Configurable, ActionListener {
                 }
 
                 return bingClientIdChanged || bingClientSecretChanged;
-            }*/
+            }
             case Google: {
                 String googleApiKeyStored = propertiesComponent.getValue(StorageDataKey.GoogleApiKeyStored);
                 boolean googleApiKeyStoredChanged = false;
@@ -211,7 +211,7 @@ public class SettingConfigurable implements Configurable, ActionListener {
         propertiesComponent.setValue(StorageDataKey.SettingLanguageEngine, currentEngine.toName());
 
         switch (currentEngine) {
-            /*case Bing: {
+            case Bing: {
                 if (!line1TextField.getText().trim().isEmpty()) {
                     propertiesComponent.setValue(StorageDataKey.BingClientIdStored, line1TextField.getText());
                     PromptSupport.setPrompt(line1TextField.getText(), line1TextField);
@@ -224,7 +224,7 @@ public class SettingConfigurable implements Configurable, ActionListener {
                 line1TextField.setText("");
                 line2TextField.setText("");
             }
-            break;*/
+            break;
             case Google: {
                 if (!line1TextField.getText().trim().isEmpty()) {
                     propertiesComponent.setValue(StorageDataKey.GoogleApiKeyStored, line1TextField.getText());
@@ -294,7 +294,7 @@ public class SettingConfigurable implements Configurable, ActionListener {
 
         PropertiesComponent propertiesComponent = PropertiesComponent.getInstance();
         switch (engineType) {
-            /*case Bing: {
+            case Bing: {
                 line1Text.setText("Client Id:");
                 line2Text.setText("Client secret:");
                 line2Text.setVisible(true);
@@ -322,7 +322,7 @@ public class SettingConfigurable implements Configurable, ActionListener {
                 }
                 line2TextField.setText("");
             }
-            break;*/
+            break;
             case Google: {
                 line1Text.setText("API key:");
                 line2Text.setVisible(false);
@@ -334,7 +334,7 @@ public class SettingConfigurable implements Configurable, ActionListener {
                 howToLabel.addMouseListener(googleHowTo);
 
                 String googleAPIKey = propertiesComponent.getValue(StorageDataKey.GoogleApiKeyStored);
-
+                Log.i("apikey====" + PropertiesComponent.getInstance().getValue(StorageDataKey.GoogleApiKeyStored));
                 if (googleAPIKey != null) {
                     PromptSupport.setPrompt(googleAPIKey, line1TextField);
                 } else {

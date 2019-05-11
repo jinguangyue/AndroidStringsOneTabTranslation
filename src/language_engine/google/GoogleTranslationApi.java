@@ -71,6 +71,7 @@ public class GoogleTranslationApi {
 
         String getResult = HttpUtils.doHttpPost(BASE_TRANSLATION_URL, params);
         Log.i("do get result: " + getResult + "   url====" + BASE_TRANSLATION_URL);
+        Log.i("apikey====" + PropertiesComponent.getInstance().getValue(StorageDataKey.GoogleApiKeyStored));
 
         JsonObject jsonObject = new JsonParser().parse(getResult).getAsJsonObject();
         if (jsonObject.get("error") != null) {
